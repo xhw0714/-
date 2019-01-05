@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie = edge" />
+    <title>珠峰架构师</title>
+</head>
+
+<body>
+
+用户名<input type="text" name="username" id="username"> <br>
+密码<input type="text" name="password" id="password"><br>
+头像 <input type="file" name="file" multiple id="file">
+<button type="button" onclick="fn()">提交</button>
+<script src="/alert.js"></script>
+<script>
+    function fn() {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/login', true);
+        let formData = new FormData();
+        formData.append('username', username.value)
+        formData.append('password', password.value)
+        console.log(file.files);
+        // file.files 类数组
+        Array.from(file.files).forEach((f)=>{
+            formData.append('avatar', f)
+        })
+        xhr.onload = function () {
+            alert('上传成功')
+        }
+        xhr.send(formData);
+    }
+</script>
+
+<!-- <form action="/login" method="POST" enctype="multipart/form-data">
+用户名<input type="text" name="username"> <br>
+密码<input type="text" name="password"><br>
+头像 <input type="file" name="file" multiple>
+<button type="submit">提交</button>
+</form> -->
+</body>
+
+</html>
