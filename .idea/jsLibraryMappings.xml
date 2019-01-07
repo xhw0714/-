@@ -3,6 +3,5 @@
   <component name="JavaScriptLibraryMappings">
     <file url="PROJECT" libraries="{@types/jquery, @types/node}" />
     <includedPredefinedLibrary name="Node.js Core" />
-    <excludedPredefinedLibrary name="HTML" />
   </component>
 </project>
