@@ -2,7 +2,7 @@ let createStore = (reducer) => {
     let state = {}
     let listener = []
     let getState = () => state
-    let dispath = (action) => {
+    let dispatch = (action) => {
         state = reducer(state, action)
         listener.forEach(fn => fn())
     }
@@ -14,11 +14,30 @@ let createStore = (reducer) => {
     }
     return {
         getState,
-        dispath,
+        dispatch,
         subscribe
     }
 }
 
-export default {
-    createStore
+let combineReducers = (reducers) => {
+    return (state = {}, action) => {
+         for (let key in reducers) {
+             state[key] = reducers[key](state[key], action)
+         }
+         return state
+    }
+}
+
+let bindActionCreators = (actions, dispatch) => {
+    let obj = {}
+    for (let key in actions) {
+        obj[key] = (val) => dispatch(actions[key](val))
+    }
+    return obj
+}
+
+export {
+    createStore,
+    combineReducers,
+    bindActionCreators
 }

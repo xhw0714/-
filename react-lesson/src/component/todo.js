@@ -1,9 +1,12 @@
 import React from 'react'
+import {connect} from '../react-redux'
+import * as actions from '../action'
 
 class todo extends React.Component{
     handle = (e) =>{
-        console.log(this.refs.myInput.value)
+        this.props.add(this.refs.myInput.value)
     }
+
     render() {
         return (
             <div>
@@ -14,4 +17,10 @@ class todo extends React.Component{
     }
 }
 
-export default todo
+let mapStateToProps = (state) => {
+    return {
+        todo:state.todo
+    }
+}
+
+export default connect(mapStateToProps,actions)(todo)
